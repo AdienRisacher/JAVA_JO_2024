@@ -23,88 +23,44 @@ public class HelloServlet extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
-
-        // Hello
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>" + message + "</h1>");
-
-
-        Context initContext = null;
-        try {
-            initContext = new InitialContext();
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
-        }
-        Context envContext = null;
-        try {
-            envContext = (Context) initContext.lookup("java:/comp/env");
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
-        }
-        DataSource dataSource = null;
-        try {
-            dataSource = (DataSource) envContext.lookup("jdbc/JO");
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
-        }
-        Connection connection;
-        try {
-            connection = dataSource.getConnection();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-// Use the connection for database operations
-
+        Context ctx = null;
+        Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
-
         try {
-            stmt = connection.createStatement();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+            ctx = new InitialContext();
+            DataSource ds = (DataSource) ctx.lookup("jdbc/jo");
 
-        try {
-            rs = stmt.executeQuery("select * from CLIENTS");
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+            con = ds.getConnection();
+            stmt = con.createStatement();
 
-        while(true)
-        {
-            try {
-                if (!rs.next()) break;
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            out.print("<tr>");
-            try {
+            rs = stmt.executeQuery("SELECT * FROM CLIENTS");
+
+            PrintWriter out = response.getWriter();
+            response.setContentType("text/html");
+            out.print("<html><body><h2>Employee Details</h2>");
+            out.print("<table border=\"1\" cellspacing=10 cellpadding=5>");
+            out.print("<th>IDCLIENT</th>");
+            out.print("<th>MAILCLIENT</th>");
+            out.print("<th>NOMCLIENT</th>");
+            out.print("<th>MDPCLIENT</th>");
+
+            while (rs.next()) {
+                out.print("<tr>");
                 out.print("<td>" + rs.getInt("IDCLIENT") + "</td>");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            try {
                 out.print("<td>" + rs.getString("MAILCLIENT") + "</td>");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            try {
                 out.print("<td>" + rs.getString("NOMCLIENT") + "</td>");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            try {
                 out.print("<td>" + rs.getString("MDPCLIENT") + "</td>");
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+                out.print("</tr>");
             }
-            out.print("</tr>");
+            out.print("</table></body><br/>");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (NamingException e) {
+            throw new RuntimeException(e);
         }
-        out.println("</body></html>");
     }
 
-    public void destroy() {
+        public void destroy() {
     }
 }
