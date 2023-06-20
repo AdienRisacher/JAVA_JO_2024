@@ -4,13 +4,7 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
 
-    <servlet>
-        <servlet-name>SportController</servlet-name>
-        <servlet-class>com.example.java_jo_2024.SportController</servlet-class>
-    </servlet>
+    <display-name>JAVA_JO_2024</display-name>
 
-    <servlet-mapping>
-        <servlet-name>SportController</servlet-name>
-        <url-pattern>com/example/java_jo_2024/SportController.java</url-pattern>
-    </servlet-mapping>
+
 </web-app>
