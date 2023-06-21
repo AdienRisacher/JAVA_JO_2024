@@ -16,7 +16,6 @@ public class ConcoursController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Initialisez la liste des concours
-        HttpSession session = request.getSession();
         List<Concours> concoursList = (ArrayList<Concours>) request.getAttribute("concoursList");
         if(concoursList == null) {
             concoursList = new ArrayList<>();

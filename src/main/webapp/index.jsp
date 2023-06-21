@@ -7,6 +7,9 @@
 <body>
 <h1>hello</h1>
 <br/>
-<a href="concours">Hello Servlet</a>
+<a href="concours">Concours</a>
+<a href="inscription.jsp">Inscription</a>
+<a href="connexion.jsp">Connexion</a>
+<a href="listuser.jsp">ListUser</a>
 </body>
 </html>
