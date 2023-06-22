@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Inscription</h1>
-<form method="post" action="resultatInscription.jsp">
+<form method="get" action="${pageContext.request.contextPath}/resultatInscription">
     <label for="nom">Nom:</label>
     <input type="text" id="nom" name="nom" required><br>
 
@@ -14,7 +14,7 @@
     <input type="email" id="email" name="email" required><br>
 
     <label for="motDePasse">Mot de passe:</label>
-    <input type="password" id="motDePasse" name="motDePasse" required><br>
+    <input type="password" id="motDePasse" name="mdp" required><br>
 
     <input type="submit" value="S'inscrire">
 </form>

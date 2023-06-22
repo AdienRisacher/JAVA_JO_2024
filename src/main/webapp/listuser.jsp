@@ -20,6 +20,8 @@
             <a><h3><%= user.getNom() %></h3></a>
         </div>
         <p><%= user.getEmail() %></p>
+        <p><%= user.getMdp() %></p>
+        <p><%= user.getId() %></p>
     </li>
     <% } %>
 </ul>

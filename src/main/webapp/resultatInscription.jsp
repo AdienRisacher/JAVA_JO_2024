@@ -10,7 +10,7 @@
 <%
     String nom = request.getParameter("nom");
     String email = request.getParameter("email");
-    String motDePasse = request.getParameter("motDePasse");
+    String motDePasse = request.getParameter("mdp");
 
     // Traiter les données ici (par exemple, enregistrer dans une base de données)
 

@@ -1,6 +1,7 @@
 package com.example.java_jo_2024;
 
 import com.mysql.cj.xdevapi.Client;
+import com.mysql.cj.xdevapi.Result;
 import com.mysql.cj.xdevapi.Session;
 
 import java.sql.*;
@@ -49,12 +50,23 @@ public class Bdd {
         while (resultSet.next()) {
             String nom = resultSet.getString("NOMCLIENT");
             String email = resultSet.getString("MAILCLIENT");
-            User user = new User(nom, email);
+            String mdp = resultSet.getString("MDPCLIENT");
+            int id = resultSet.getInt("IDCLIENT");
+            User user = new User(nom, email, mdp, id);
             ListUser.add(user);
         }
         resultSet.close();
         statement.close();
         disconnect();
         return ListUser;
+    }
+
+    public User createUser(String nom, String email, String mdp) throws SQLException {
+        connect();
+        Statement statement = jdbcConnexion.createStatement();
+        int resultSet = statement.executeUpdate("INSERT INTO clients (NOMCLIENT,MAILCLIENT,MDPCLIENT) VALUES ('"+nom+"','"+email+"','"+mdp+"')");
+        statement.close();
+        disconnect();
+        return new User(nom,email,mdp,0);
     }
 }

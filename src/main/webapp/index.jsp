@@ -10,6 +10,6 @@
 <a href="concours">Concours</a>
 <a href="inscription.jsp">Inscription</a>
 <a href="connexion.jsp">Connexion</a>
-<a href="listuser.jsp">ListUser</a>
+<a href="listuser">ListUser</a>
 </body>
 </html>

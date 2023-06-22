@@ -1,23 +1,32 @@
 package com.example.java_jo_2024;
-import com.example.java_jo_2024.Bdd;
-
-import java.util.ArrayList;
 
 public class User {
     private String nom;
     private String email;
+    private String mdp;
+    private int id;
 
-    public User(String nom, String email) {
+    public User(String nom, String email, String mdp, int id) {
         this.nom = nom;
         this.email = email;
+        this.mdp = mdp;
+        this.id = id;
     }
 
     public String getNom() {
+
         return nom;
+    }
+
+    public String getMdp(){
+        return mdp;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public int getId() {
+        return id;
+    }
 }
