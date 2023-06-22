@@ -6,7 +6,7 @@ public class User {
     private String mdp;
     private int id;
 
-    public User(String nom, String email, String mdp, int id) {
+    public User(String nom, String email, String mdp, Integer id) {
         this.nom = nom;
         this.email = email;
         this.mdp = mdp;
@@ -26,7 +26,7 @@ public class User {
         return email;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 }

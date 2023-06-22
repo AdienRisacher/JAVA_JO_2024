@@ -8,9 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Bdd {
-    private String jdbcURL = "jdbc:mysql://root:@localhost:3306/jo";
+    private String jdbcURL = "jdbc:mysql://root:tribadri23@localhost:3306/jo";
     private String jdbcUsername = "root";
-    private String jdbcPassword = "";
+    private String jdbcPassword = "tribadri23";
     private Connection jdbcConnexion;
 
     public void connect(){
@@ -51,7 +51,7 @@ public class Bdd {
             String nom = resultSet.getString("NOMCLIENT");
             String email = resultSet.getString("MAILCLIENT");
             String mdp = resultSet.getString("MDPCLIENT");
-            int id = resultSet.getInt("IDCLIENT");
+            Integer id = resultSet.getInt("IDCLIENT");
             User user = new User(nom, email, mdp, id);
             ListUser.add(user);
         }
@@ -64,9 +64,30 @@ public class Bdd {
     public User createUser(String nom, String email, String mdp) throws SQLException {
         connect();
         Statement statement = jdbcConnexion.createStatement();
-        int resultSet = statement.executeUpdate("INSERT INTO clients (NOMCLIENT,MAILCLIENT,MDPCLIENT) VALUES ('"+nom+"','"+email+"','"+mdp+"')");
+        statement.executeUpdate("INSERT INTO clients (NOMCLIENT,MAILCLIENT,MDPCLIENT) VALUES ('"+nom+"','"+email+"','"+mdp+"')");
         statement.close();
         disconnect();
-        return new User(nom,email,mdp,0);
+        return new User(nom,email,mdp,null);
     }
-}
+
+    public User connexionUser(String email, String mdp) throws SQLException {
+        connect();
+        Statement statement = jdbcConnexion.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT * FROM clients WHERE MAILCLIENT = '"+email+"'AND MDPCLIENT = '"+mdp+"'");
+        if (!resultSet.next()) {
+            resultSet.close();
+            statement.close();
+            disconnect();
+            return null;
+        } else {
+            String nom = resultSet.getString("NOMCLIENT");
+            email = resultSet.getString("MAILCLIENT");
+            mdp = resultSet.getString("MDPCLIENT");
+            Integer id = resultSet.getInt("IDCLIENT");
+            resultSet.close();
+            statement.close();
+            disconnect();
+            return new User(nom, email, mdp, id);
+        }
+    }
+    }

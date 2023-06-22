@@ -18,7 +18,7 @@ public class InscriptionController extends HttpServlet {
     Bdd bdd = new Bdd();
     User user;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nom = request.getParameter("nom");
         String email = request.getParameter("email");
         String mdp = request.getParameter("mdp");

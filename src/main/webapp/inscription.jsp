@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Inscription</h1>
-<form method="get" action="${pageContext.request.contextPath}/resultatInscription">
+<form method="post" action="${pageContext.request.contextPath}/resultatInscription">
     <label for="nom">Nom:</label>
     <input type="text" id="nom" name="nom" required><br>
 
