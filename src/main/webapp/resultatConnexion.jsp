@@ -21,6 +21,10 @@
         // Connexion réussie
 %>
 <p>Connexion réussie pour l'email : <%= user.getEmail() %></p>
+<h1>Jeu concours</h1>
+<form method="post" action="${pageContext.request.contextPath}/concoursQuestionnaire.jsp">
+    <input type="submit" value="Participer">
+</form>
 <%
 } else {
     String error = (String) request.getAttribute("error");
