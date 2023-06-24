@@ -15,7 +15,7 @@
 
     <label for="motDePasse">Mot de passe:</label>
     <input type="password" id="motDePasse" name="mdp" required><br>
-
+    <a href="${loginURL}" class="btn-google">Login with Google</a>
     <input type="submit" value="S'inscrire">
 </form>
 </body>

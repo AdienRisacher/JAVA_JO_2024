@@ -18,7 +18,7 @@ public class ConnexionController extends HttpServlet {
     Bdd bdd = new Bdd();
     User user;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String mdp = request.getParameter("mdp");
         try {
