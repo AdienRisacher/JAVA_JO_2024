@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page import="com.example.java_jo_2024.User" %>
 <html>
 <head>
     <title>Concours pour gagner des places</title>

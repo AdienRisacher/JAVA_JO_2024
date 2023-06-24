@@ -90,4 +90,31 @@ public class Bdd {
             return new User(nom, email, mdp, id);
         }
     }
+
+    public boolean updateConcours(String userID, String win) throws SQLException {
+        connect();
+        Statement statement = jdbcConnexion.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT PARTICIP FROM CONCOURS WHERE IDCLIENT = '"+userID+"'");
+        if (!resultSet.next()) {
+            resultSet.close();
+            statement.close();
+            disconnect();
+            return false;
+        } else {
+            String particip = resultSet.getString("PARTICIP");
+            resultSet.close();
+            if(particip == "1"){
+                statement.close();
+                disconnect();
+                return false;
+            }
+        }
+        resultSet = statement.executeQuery("UPDATE CONCOURS SET PARTICIP = true, GAGNANT = '"+win+"' WHERE IDCLIENT = '"+userID+"'");
+        statement.close();
+        disconnect();
+        if(win == "True"){
+            return true;
+        }
+        else return false;
     }
+}
