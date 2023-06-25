@@ -40,7 +40,7 @@ public class GagnantController extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("resultatConcours.jsp");
             dispatcher.forward(request, response);
         } else {
-            request.setAttribute("loose", rep);
+            request.setAttribute("won", rep);
             RequestDispatcher dispatcher = request.getRequestDispatcher("resultatConcours.jsp");
             dispatcher.forward(request, response);
         }

@@ -10,6 +10,8 @@
 <%-- Récupérer les données du formulaire --%>
 <%
     User user = (User) request.getAttribute("user");
+    request.setAttribute("user", user);
+    request.getRequestDispatcher("concoursQuestionnaire.jsp").forward(request, response);
     boolean estValide;
     // Vérifier les informations de connexion ici (par exemple, en les comparant à une base de données)
     if(user != null) {

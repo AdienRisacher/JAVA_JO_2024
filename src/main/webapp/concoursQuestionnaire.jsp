@@ -8,6 +8,11 @@
     <link href="menuConcours.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<%
+    User user = (User) request.getAttribute("user");
+    request.setAttribute("user", user);
+    request.setAttribute("userID", user.getId);
+%>
 <div class="menu-container">
 <h1>Concours pour gagner des places</h1>
 <form method="post" action="${pageContext.request.contextPath}/resultatConcours">

@@ -9,21 +9,13 @@
 <h1>Résultat du jeu concours</h1>
 <%-- Récupérer les données du formulaire --%>
 <%
-    User user = (User) request.getAttribute("user");
-    boolean estValide;
-    // Vérifier les informations de connexion ici (par exemple, en les comparant à une base de données)
-    if(user != null) {
-        estValide = true; // À remplacer par la logique de validation réelle
-    }else {
-        estValide = false;
-    }
+    boolean estValide = request.getAttribute("won");;
     if (estValide) {
         // Concours Gagné
 %>
 <p>Gagné : <%= user.getName() %></p>
 <%
 } else {
-    String error = (String) request.getAttribute("error");
     // Concours Perdu
 %>
 <p>Perdu : <%= user.getName() %></p>
