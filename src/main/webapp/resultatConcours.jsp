@@ -9,16 +9,17 @@
 <h1>Résultat du jeu concours</h1>
 <%-- Récupérer les données du formulaire --%>
 <%
-    boolean estValide = request.getAttribute("won");;
+    User user = (User) request.getAttribute("user");
+    boolean estValide = (boolean) request.getAttribute("won");;
     if (estValide) {
         // Concours Gagné
 %>
-<p>Gagné : <%= user.getName() %></p>
+<p>Gagné : <%= user.getNom() %></p>
 <%
 } else {
     // Concours Perdu
 %>
-<p>Perdu : <%= user.getName() %></p>
+<p>Perdu : <%= user.getNom() %></p>
 <%
     }
 %>

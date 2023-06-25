@@ -11,7 +11,7 @@
 <%
     User user = (User) request.getAttribute("user");
     request.setAttribute("user", user);
-    request.setAttribute("userID", user.getId);
+    request.setAttribute("userID", user.getId());
 %>
 <div class="menu-container">
 <h1>Concours pour gagner des places</h1>
