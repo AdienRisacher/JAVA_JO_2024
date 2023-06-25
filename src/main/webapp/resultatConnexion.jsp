@@ -57,6 +57,8 @@
 <%-- Récupérer les données du formulaire --%>
 <%
     User user = (User) request.getAttribute("user");
+    request.setAttribute("user", user);
+    request.getRequestDispatcher("concoursQuestionnaire.jsp").forward(request, response);
     boolean estValide;
     // Vérifier les informations de connexion ici (par exemple, en les comparant à une base de données)
     if(user != null) {
@@ -67,7 +69,11 @@
     if (estValide) {
         // Connexion réussie
 %>
-<p>Connexion réussie pour l'email : <%=user.getEmail()%></p>
+<p>Connexion réussie pour l'email : <%= user.getEmail() %></p>
+<h1>Jeu concours</h1>
+<form method="post" action="${pageContext.request.contextPath}/concoursQuestionnaire.jsp">
+    <input type="submit" value="Participer">
+</form>
 <%
 } else {
     String error = (String) request.getAttribute("error");

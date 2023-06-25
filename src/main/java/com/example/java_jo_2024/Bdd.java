@@ -8,9 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Bdd {
-    private String jdbcURL = "jdbc:mysql://root:tribadri23@localhost:3306/jo";
+    private String jdbcURL = "jdbc:mysql://root:@localhost:3306/jo";
     private String jdbcUsername = "root";
-    private String jdbcPassword = "tribadri23";
+    private String jdbcPassword = "root";
     private Connection jdbcConnexion;
 
     public void connect(){
@@ -90,4 +90,31 @@ public class Bdd {
             return new User(nom, email, mdp, id);
         }
     }
+
+    public boolean updateConcours(String userID, String win) throws SQLException {
+        connect();
+        Statement statement = jdbcConnexion.createStatement();
+        ResultSet resultSet = statement.executeQuery("SELECT PARTICIP FROM CONCOURS WHERE IDCLIENT = '"+userID+"'");
+        if (!resultSet.next()) {
+            resultSet.close();
+            statement.close();
+            disconnect();
+            return false;
+        } else {
+            String particip = resultSet.getString("PARTICIP");
+            resultSet.close();
+            if(particip == "1"){
+                statement.close();
+                disconnect();
+                return false;
+            }
+        }
+        resultSet = statement.executeQuery("UPDATE CONCOURS SET PARTICIP = true, GAGNANT = '"+win+"' WHERE IDCLIENT = '"+userID+"'");
+        statement.close();
+        disconnect();
+        if(win == "True"){
+            return true;
+        }
+        else return false;
     }
+}
