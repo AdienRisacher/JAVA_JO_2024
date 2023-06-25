@@ -8,9 +8,9 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class Bdd {
-    private String jdbcURL = "jdbc:mysql://root:@localhost:3306/jo";
+    private String jdbcURL = "jdbc:mysql://root:tribadri23@localhost:3306/jo";
     private String jdbcUsername = "root";
-    private String jdbcPassword = "root";
+    private String jdbcPassword = "tribadri23";
     private Connection jdbcConnexion;
 
     public void connect(){
@@ -117,4 +117,5 @@ public class Bdd {
         }
         else return false;
     }
-}
+
+    }
