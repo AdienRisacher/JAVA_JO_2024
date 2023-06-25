@@ -13,7 +13,7 @@
 <form method="post" action="${pageContext.request.contextPath}/resultatConcours">
     <label for="ConnaissancesSportives">Connaissances Sportives:</label>
     <p>Est ce que la France à gagné plus de trente cinq médailles lors des dernier JO de Tokyo</p>
-    <input type="radio" id="radio" name="ConnSport" value="Vrai"><br>
+    <input type="radio" id="radio" name="connsport" value="radiobtn"><br>
 
     <label for="Predictions">Prédictions :</label>
     <p>Qui gagnera le plus de médailles aux JO de Paris qui arriveront</p>
@@ -29,7 +29,7 @@
 
     <label for="DefiVirtuels">Défi virtuel :</label>
         <p>Quel est ce défi ?</p>
-        <input type="radio" id="radio" name="Defi" value="defi"><br>
+        <input type="radio" id="radio" name="defi" value="defi"><br>
 
     <input type="submit" value="Valider">
 </form>

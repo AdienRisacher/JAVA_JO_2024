@@ -20,7 +20,16 @@ public class GagnantController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String userID = request.getParameter("userID");
-        String win = request.getParameter("resultats");
+        String connsport = request.getParameter("connsport");
+        String prediction = request.getParameter("prediction");
+        String defi = request.getParameter("defi");
+        String win;
+        if(prediction == "France"){
+            win = "True";
+        }
+        else{
+            win = "False";
+        }
         try {
             rep = bdd.updateConcours(userID, win);
         } catch (SQLException e) {
