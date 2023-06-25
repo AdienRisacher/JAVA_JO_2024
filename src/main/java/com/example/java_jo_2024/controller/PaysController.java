@@ -1,46 +1,59 @@
 package com.example.java_jo_2024.controller;
 
+import com.example.java_jo_2024.model.entity.Pays;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.URI;
 
-@RestController
+@Controller
 public class PaysController {
     @Value("${api.key}")
     private String apiKey;
 
-    @Value("${server.port}")
-    private String serverPort;
+    @Autowired
+    private RestTemplate restTemplate;
 
     @GetMapping("/java_jo_2024/pays")
-    public ResponseEntity<String> getPays() {
+    public @ResponseBody ResponseEntity<Pays> getPays() {
         try {
             String apiUrl = "https://api.api-ninjas.com/v1/country?name=United States";
 
-            URL url = new URL(apiUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("accept", "application/json");
-            InputStream responseStream = connection.getInputStream();
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("accept", "application/json");
+            headers.add("Authorization", "X-Api-Key " + apiKey);
 
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode root = mapper.readTree(responseStream);
+            RequestEntity<Object> requestEntity = new RequestEntity<>(headers, HttpMethod.GET, new URI(apiUrl));
 
-            String fact = root.path("fact").asText();
+            ResponseEntity<String> responseEntity = restTemplate.exchange(requestEntity, String.class);
 
-            return ResponseEntity.ok(fact);
+            if (responseEntity.getStatusCode() == HttpStatus.OK) {
+                String response = responseEntity.getBody();
+                ObjectMapper mapper = new ObjectMapper();
+                JsonNode root = mapper.readTree(response);
+
+                String iso2 = root.path("iso2").asText();
+                String name = root.path("name").asText();
+                String capital = root.path("capital").asText();
+                String population = root.path("population").asText();
+
+
+                Pays pays = new Pays(iso2, name, capital, "", population, "");
+
+                return ResponseEntity.ok(pays);
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
-
 }

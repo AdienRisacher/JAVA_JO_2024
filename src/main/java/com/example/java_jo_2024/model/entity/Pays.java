@@ -1,15 +1,15 @@
 package com.example.java_jo_2024.model.entity;
 
 public class Pays {
-    private String iso3;
+    private String iso2;
     private String name;
     private String capital;
     private String flag;
     private String population;
     private String facts;
 
-    public Pays(String iso3, String name, String capital, String flag, String population, String facts) {
-        this.iso3 = iso3;
+    public Pays(String iso2, String name, String capital, String flag, String population, String facts) {
+        this.iso2 = iso2;
         this.name = name;
         this.capital = capital;
         this.flag = flag;
@@ -17,12 +17,12 @@ public class Pays {
         this.facts = facts;
     }
 
-    public String getIso3() {
-        return iso3;
+    public String getIso2() {
+        return iso2;
     }
 
-    public void setIso3(String iso3) {
-        this.iso3 = iso3;
+    public void setIso2(String iso2) {
+        this.iso2 = iso2;
     }
 
 
